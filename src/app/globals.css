@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+@font-face {
+  font-family: 'ZenFont';
+  src: url('/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: 'bodyfont';
+  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {  /* Deep dark background for calm minimal look */
+  --foreground:#000000 ;   /* Slightly lighter for sections/cards */
+  --primary: #E0E0E0;      /* Main text - soft white */
+  --secondary: #B0B0B0;    /* Subtext or labels - gentle gray */
+  --accent: #948f8f;       /* Peaceful muted green for highlights/buttons */
+  --highlight: #CFC5B7;    /* Warm beige for selection/background accents */
+  --hover: #6D8C64;        /* Softer green for hover states or subtle emphasis */
+}
+
+
+nav p{
+  color: var(--primary);
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "bodyfont", sans-serif;
 }
+
+h1, h2, h3 {
+  font-family: "ZenFont", serif;
+  color: var(--primary);
+}
+/* Hide scrollbar but keep scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
