@@ -11,6 +11,7 @@ export default function UserProvider({ children }) {
     username: "",
     bio: "",
   });
+  const [loading, setLoading] = useState(true); // 👈 add this
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -19,13 +20,11 @@ export default function UserProvider({ children }) {
           "https://quietconnect-backend.onrender.com/api/user/username",
           { withCredentials: true }
         );
-
-        // Backend now returns: userId, username, bio
-        console.log("context user", res);
-        
         setUser(res.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false); // 👈 always set false when done
       }
     };
 
@@ -41,7 +40,7 @@ export default function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ ...user, updateUser }}>
+    <UserContext.Provider value={{ ...user, loading, updateUser }}> {/* 👈 expose loading */}
       {children}
     </UserContext.Provider>
   );

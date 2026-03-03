@@ -235,7 +235,7 @@ export default function Home() {
   const fetchingRef = useRef(false);
   const pageRef = useRef(0);
 
-  const { username } = useUser();
+  const { username, loading:userLoading } = useUser();
 
   console.log("from home page your user name", username);
   
@@ -243,10 +243,10 @@ export default function Home() {
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
-    if (mounted && !username) {
+    if (mounted && !username && !userLoading) {
       router.replace("/");
     }
-  }, [mounted, username, router]);
+  }, [mounted, username, router,userLoading]);
 
   const fetchFeed = useCallback(async () => {
     if (fetchingRef.current || !hasMore) return;
