@@ -14,7 +14,7 @@ function Profile({ user_info, onNext }) {
 
 const handleLogout = async () => {
   try {
-    const response = await fetch("http://localhost:8080/logout", {
+    const response = await fetch("http://quietconnect-backend.onrender.com/logout", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

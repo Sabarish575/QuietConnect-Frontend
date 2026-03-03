@@ -17,7 +17,7 @@ function Page() {
     const getMe = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/user/me",
+          "http://quietconnect-backend.onrender.com/api/user/me",
           { withCredentials: true }
         );
         setCurrentUserId(res.data);
@@ -35,7 +35,7 @@ function Page() {
     const getPost = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/api/getPosts/${id}`,
+          `http://quietconnect-backend.onrender.com/api/getPosts/${id}`,
           { withCredentials: true }
         );
         setPost(res.data);
@@ -57,7 +57,7 @@ const handleLike = async () => {
 
   try {
     const res = await axios.post(
-      `http://localhost:8080/api/like/${id}`,
+      `http://quietconnect-backend.onrender.com/api/like/${id}`,
       {},
       { withCredentials: true }
     );

@@ -24,7 +24,7 @@ const PublicProfile = ({ id }) => {
     async function fetchUser() {
       try {
         const res = await axios.get(
-          `http://localhost:8080/api/user/user-data/${id}`,
+          `http://quietconnect-backend.onrender.com/api/user/user-data/${id}`,
           { withCredentials: true }
         );
         setUserdata(res.data);
@@ -43,7 +43,7 @@ const PublicProfile = ({ id }) => {
     const fetchScore = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/api/score/getReputation/${id}`,
+          `http://quietconnect-backend.onrender.com/api/score/getReputation/${id}`,
           { withCredentials: true }
         );
         setScore(res.data);
@@ -64,7 +64,7 @@ const PublicProfile = ({ id }) => {
       setLoadingFollow(true);
 
       const res = await axios.post(
-        `http://localhost:8080/api/user/followandunfollow/${id}`,
+        `http://quietconnect-backend.onrender.com/api/user/followandunfollow/${id}`,
         {},
         { withCredentials: true }
       );

@@ -24,7 +24,7 @@ function Banner({ Community, id }) {
     const checkJoined = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/api/community/check/${id}`,
+          `http://quietconnect-backend.onrender.com/api/community/check/${id}`,
           { withCredentials: true }
         );
         setJoined(res.data);
@@ -55,7 +55,7 @@ function Banner({ Community, id }) {
   async function handleJoinandUnjoin() {
     try {
       const res = await axios.post(
-        `http://localhost:8080/api/community/joinandunjoin/${id}`,
+        `http://quietconnect-backend.onrender.com/api/community/joinandunjoin/${id}`,
         {},
         { withCredentials: true }
       );

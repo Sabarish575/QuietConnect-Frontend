@@ -24,7 +24,7 @@ export default function Username() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/user/name",
+        "http://quietconnect-backend.onrender.com/api/user/name",
         {
           username,
           bio,

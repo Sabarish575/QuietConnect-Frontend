@@ -16,7 +16,7 @@ export default function UserProvider({ children }) {
     const fetchUserInfo = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/user/username",
+          "http://quietconnect-backend.onrender.com/api/user/username",
           { withCredentials: true }
         );
 

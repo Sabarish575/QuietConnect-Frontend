@@ -55,7 +55,7 @@ function Header2() {
     const fetch=async ()=>{
       try {
 
-      const res = await axios.get("http://localhost:8080/api/user/getPercentage",
+      const res = await axios.get("http://quietconnect-backend.onrender.com/api/user/getPercentage",
       {withCredentials: true});
 
       setEnergy(res.data || 0);
@@ -73,7 +73,7 @@ function Header2() {
   async function handleBattery(){
     try {
 
-      const res = await axios.post("http://localhost:8080/api/user/addBattery",
+      const res = await axios.post("http://quietconnect-backend.onrender.com/api/user/addBattery",
       energy,
       {
         headers: { 'Content-Type': 'application/json' },

@@ -27,7 +27,7 @@ export default function Chat({ autoOpenUserId }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/user/me", { withCredentials: true })
+      .get("http://quietconnect-backend.onrender.com/api/user/me", { withCredentials: true })
       .then((res) => setCurrentUser(res.data))
       .catch(console.log);
   }, []);
@@ -41,7 +41,7 @@ export default function Chat({ autoOpenUserId }) {
   const fetchChatFriends = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/chat/getFriend",
+        "http://quietconnect-backend.onrender.com/api/chat/getFriend",
         { withCredentials: true }
       );
       setFriends(res.data || []);
@@ -65,7 +65,7 @@ export default function Chat({ autoOpenUserId }) {
       if (!userToOpen) {
         try {
           const res = await axios.get(
-            `http://localhost:8080/api/user/user-data/${autoOpenUserId}`,
+            `http://quietconnect-backend.onrender.com/api/user/user-data/${autoOpenUserId}`,
             { withCredentials: true }
           );
           userToOpen = res.data;
@@ -85,7 +85,7 @@ export default function Chat({ autoOpenUserId }) {
   useEffect(() => {
     if (!currentUser) return;
 
-    const socket = new SockJS("http://localhost:8080/chat");
+    const socket = new SockJS("http://quietconnect-backend.onrender.com/chat");
 
     const stompClient = new Client({
       webSocketFactory: () => socket,
@@ -145,7 +145,7 @@ export default function Chat({ autoOpenUserId }) {
 
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/chat/getOldchat/${user.userId}`,
+        `http://quietconnect-backend.onrender.com/api/chat/getOldchat/${user.userId}`,
         { withCredentials: true }
       );
       setChats(res.data || []);
