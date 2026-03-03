@@ -3,8 +3,7 @@
 // components/GoogleSignInButton.jsx
 export default function SignUp() {
   const handleGoogleSignIn = () => {
-    // Redirect to Spring Boot backend OAuth endpoint
-    window.location.href = "http://quietconnect-backend.onrender.com/oauth2/authorization/google";
+    window.location.href = "https://quietconnect-backend.onrender.com/oauth2/authorization/google";
   };
 
   return (
