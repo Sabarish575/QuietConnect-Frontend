@@ -65,7 +65,7 @@ function EnergyProfile() {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "http://quietconnect-backend.onrender.com/api/user/userCard",
+          "https://quietconnect-backend.onrender.com/api/user/userCard",
           { withCredentials: true }
         );
         setUserCard(res.data);
@@ -120,7 +120,7 @@ function RightStats() {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "http://quietconnect-backend.onrender.com/api/user/userStat",
+          "https://quietconnect-backend.onrender.com/api/user/userStat",
           { withCredentials: true }
         );
         setPostStat(res.data);
@@ -256,7 +256,7 @@ export default function Home() {
 
     try {
       const res = await axios.get(
-        "http://quietconnect-backend.onrender.com/api/userFeed",
+        "https://quietconnect-backend.onrender.com/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
           withCredentials: true,

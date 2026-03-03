@@ -47,7 +47,7 @@ function CommentItem({ comment }) {
     setLoadingReplies(true);
     try {
       const res = await axios.get(
-        `http://quietconnect-backend.onrender.com/api/getReply/${comment.id}`,
+        `https://quietconnect-backend.onrender.com/api/getReply/${comment.id}`,
         { withCredentials: true }
       );
       mergeReplies(res.data);
@@ -73,7 +73,7 @@ function CommentItem({ comment }) {
     setPostingReply(true);
     try {
       await axios.post(
-        `http://quietconnect-backend.onrender.com/api/addReply`,
+        `https://quietconnect-backend.onrender.com/api/addReply`,
         {
           comment_id: comment.id,
           reply: replyText,

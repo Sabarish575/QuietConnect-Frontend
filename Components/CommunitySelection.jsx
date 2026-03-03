@@ -12,7 +12,7 @@ function CommunitySelection({ topicIds = [], setTopicIds, onPrev, handleSubmit, 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const res = await axios.get("http://quietconnect-backend.onrender.com/api/topics", { withCredentials: true });
+        const res = await axios.get("https://quietconnect-backend.onrender.com/api/topics", { withCredentials: true });
         const topicsArray = Array.isArray(res.data) ? res.data : res.data.data;
 
         if (!Array.isArray(topicsArray)) { toast.error("Invalid topics data from backend"); return }

@@ -10,7 +10,7 @@ export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get("http://quietconnect-backend.onrender.com/auth/me", {
+    axios.get("https://quietconnect-backend.onrender.com/auth/me", {
       withCredentials: true,
     })
     .then(res => {

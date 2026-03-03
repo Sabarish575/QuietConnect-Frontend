@@ -33,7 +33,7 @@ function CommentSection({ postId }) {
 
     try {
       const res = await axios.get(
-        `http://quietconnect-backend.onrender.com/api/comments/${postId}?page=${pageNo}`,
+        `https://quietconnect-backend.onrender.com/api/comments/${postId}?page=${pageNo}`,
         { withCredentials: true }
       );
 
@@ -63,7 +63,7 @@ function CommentSection({ postId }) {
     setPosting(true);
     try {
       const res = await axios.post(
-        `http://quietconnect-backend.onrender.com/api/addComment`,
+        `https://quietconnect-backend.onrender.com/api/addComment`,
         { post_id: postId, comment: commentText },
         { withCredentials: true }
       );

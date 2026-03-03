@@ -68,7 +68,7 @@ function AddBlogContent() {
         setCheckingMember(true);
 
         const res = await axios.get(
-          `http://quietconnect-backend.onrender.com/api/isMember/${com.id}`,
+          `https://quietconnect-backend.onrender.com/api/isMember/${com.id}`,
           { withCredentials: true }
         );
 
@@ -92,7 +92,7 @@ function AddBlogContent() {
       setJoining(true);
 
       const res = await axios.post(
-        `http://quietconnect-backend.onrender.com/api/community/joinandunjoin/${com.id}`,
+        `https://quietconnect-backend.onrender.com/api/community/joinandunjoin/${com.id}`,
         {},
         { withCredentials: true }
       );
@@ -133,7 +133,7 @@ function AddBlogContent() {
 
     try {
       const res = await axios.post(
-        "http://quietconnect-backend.onrender.com/api/addPosts",
+        "https://quietconnect-backend.onrender.com/api/addPosts",
         sendPost,
         {
           headers: { "Content-Type": "application/json" },
@@ -172,7 +172,7 @@ function AddBlogContent() {
     if (!query.trim()) return setSuggestion([]);
     try {
       const res = await axios.get(
-        `http://quietconnect-backend.onrender.com/api/community/search/${query}`,
+        `https://quietconnect-backend.onrender.com/api/community/search/${query}`,
         { withCredentials: true }
       );
       setSuggestion(res.data);
