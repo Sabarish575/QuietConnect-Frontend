@@ -4,6 +4,7 @@ import { useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useUser } from "@/context/UserContext";
 
 
 export default function Username() {
@@ -16,6 +17,8 @@ export default function Username() {
   const handleClick = async () => {
     const username = nameRef.current.value.trim();
     const bio = bioRef.current.value.trim();
+
+    const { updateUser }=useUser();
 
     if (!username) {
       toast.error("Username is required");
@@ -30,9 +33,11 @@ export default function Username() {
           bio,
         },
         {
-          withCredentials: true, // 🔴 VERY IMPORTANT
+          withCredentials: true,
         }
       );
+
+      updateUser({username,bio});
 
       toast.success("Profile completed successfully!");
 
