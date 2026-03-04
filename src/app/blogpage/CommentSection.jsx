@@ -108,7 +108,7 @@ function CommentSection({ postId }) {
       {/* Comments */}
       {comments.map((c) => (
         <CommentItem
-          key={c.id}        // ✅ guaranteed unique
+          key={c.id}      
           comment={c}
           postId={postId}
         />

@@ -6,8 +6,6 @@ import { useUser } from "@/context/UserContext";
 
 function Profile({ user_info, onNext }) {
 
-  console.log(user_info);
-  
   const router = useRouter();
 
   const {userId}=useUser();

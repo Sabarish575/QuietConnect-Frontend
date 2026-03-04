@@ -236,8 +236,6 @@ export default function Home() {
   const pageRef = useRef(0);
 
   const { username, loading:userLoading } = useUser();
-
-  console.log("from home page your user name", username);
   
   const router = useRouter();
 

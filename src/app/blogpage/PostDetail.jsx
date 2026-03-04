@@ -115,7 +115,7 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
 
         {/* META */}
         <div className="text-sm text-white/40 flex items-center gap-3">
-          <span onClick={()=>router.push(`publicprofile/${post?.createdBy?.userId}`)} className="text-white/70 font-medium cursor-pointer hover:underline-offset-2">
+          <span onClick={()=>router.push(`/publicprofile/${post?.createdBy?.userId}`)} className="text-white/70 font-medium cursor-pointer hover:underline-offset-2">
             {post.createdBy.name}
           </span>
           <span>•</span>

@@ -134,10 +134,6 @@ export default function Chat({ autoOpenUserId }) {
 
   const handleFetchChat = async (user) => {
     setActiveUser(user);
-
-    console.log("fetching the chat ", user);
-
-    // ✅ Clear the dot for this friend when opening their chat
     setUnreadMap((prev) => ({
       ...prev,
       [user.userId]: false,
