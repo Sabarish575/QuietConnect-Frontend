@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import CommentSection from "./CommentSection";
+import { useRouter } from "next/navigation";
 
 function PostDetail({ post, onLike, currentUserId, setPost }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -14,7 +15,8 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [editedAt, setEditedAt] = useState(null);
 
-    /* ✅ Sync state when post loads */
+  const router=useRouter();
+
   useEffect(() => {
     if (post) {
       setTitle(post.title);
@@ -26,8 +28,6 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
   if (!post) return null;
 
 
-
-  /* ✅ Ownership check */
   const isOwner = post?.createdBy?.userId === currentUserId;
 
   /* ✅ SAVE EDIT */
@@ -115,7 +115,7 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
 
         {/* META */}
         <div className="text-sm text-white/40 flex items-center gap-3">
-          <span className="text-white/70 font-medium">
+          <span onClick={()=>router.push(`publicprofile/${post?.createdBy?.userId}`)} className="text-white/70 font-medium cursor-pointer hover:underline-offset-2">
             {post.createdBy.name}
           </span>
           <span>•</span>
