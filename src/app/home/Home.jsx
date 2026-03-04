@@ -300,7 +300,11 @@ export default function Home() {
     return () => observerRef.current?.disconnect();
   }, [mounted, hasMore, fetchFeed]);
 
-  if (!mounted) return null;
+  if (!mounted || userLoading) return (
+    <div className="flex min-h-screen items-center justify-center bg-black text-white">
+      <p className="text-neutral-400 text-sm">Loading...</p>
+    </div>
+  );
 
   return (
     <main className="flex-1 bg-black text-white overflow-x-hidden">
