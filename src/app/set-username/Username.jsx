@@ -13,12 +13,13 @@ export default function Username() {
   const bioRef = useRef(null);
 
   const router=useRouter();
+  const { updateUser }=useUser();
 
   const handleClick = async () => {
     const username = nameRef.current.value.trim();
     const bio = bioRef.current.value.trim();
 
-    const { updateUser }=useUser();
+
 
     if (!username) {
       toast.error("Username is required");
