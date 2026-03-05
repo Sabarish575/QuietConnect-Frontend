@@ -32,7 +32,8 @@ export default function Username() {
     }
 
     const token=sessionStorage.getItem("pending_token");
-
+    console.log(token);
+    
     try {
       const res = await axios.post(
         "https://quietconnect-backend.onrender.com/api/user/name",
