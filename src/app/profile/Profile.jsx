@@ -3,6 +3,7 @@ import React from "react";
 import { SquarePenIcon, Battery, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
+import { clearToken } from "@/lib/auth";
 
 function Profile({ user_info, onNext }) {
 
@@ -21,6 +22,7 @@ const handleLogout = async () => {
     });
 
     if (response.ok) {
+      clearToken();
       router.push("/"); 
     } else {
       console.error("Logout failed on the server");
