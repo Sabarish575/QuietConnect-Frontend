@@ -268,6 +268,7 @@ export default function Home() {
         "/proxy/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
+          withCredentials:true,
           headers:{
             Authorization: `Bearer ${token}`
           }
