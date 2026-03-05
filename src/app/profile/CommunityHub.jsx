@@ -74,10 +74,10 @@ function CommunityHub() {
   const fetchCommunities = async () => {
     try {
       const [createdRes, joinedRes] = await Promise.all([
-        axios.get("https://quietconnect-backend.onrender.com/api/community/createdCom", {
+        axios.get("/proxy/api/community/createdCom", {
           withCredentials: true,
         }),
-        axios.get("https://quietconnect-backend.onrender.com/api/community/joinedCom", {
+        axios.get("/proxy/api/community/joinedCom", {
           withCredentials: true,
         }),
       ]);
@@ -100,7 +100,7 @@ function CommunityHub() {
   const fetchUserPosts = async () => {
     try {
       const res = await axios.get(
-        "https://quietconnect-backend.onrender.com/api/getUserCreatedPosts",
+        "/proxy/api/getUserCreatedPosts",
         {
           params: { page: page.posts, size: PAGE_SIZE },
           withCredentials: true,
@@ -127,7 +127,7 @@ function CommunityHub() {
   const fetchUserComments = async () => {
     try {
       const res = await axios.get(
-        "https://quietconnect-backend.onrender.com/api/getUserCommentedPosts",
+        "/proxy/api/getUserCommentedPosts",
         {
           params: { page: page.comments, size: PAGE_SIZE },
           withCredentials: true,
@@ -154,7 +154,7 @@ function CommunityHub() {
   const deleteCommunity = async (communityId) => {
     try {
       await axios.delete(
-        `https://quietconnect-backend.onrender.com/api/community/delete/${communityId}`,
+        `/proxy/api/community/delete/${communityId}`,
         { withCredentials: true }
       );
 

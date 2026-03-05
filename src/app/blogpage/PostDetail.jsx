@@ -41,7 +41,7 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
 
     try {
       const res = await axios.patch(
-        `https://quietconnect-backend.onrender.com/api/editPost/${post.id}`,
+        `/proxy/api/editPost/${post.id}`,
         { title, description },
         { withCredentials: true }
       );

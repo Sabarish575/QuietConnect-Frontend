@@ -27,7 +27,7 @@ function ProfileWizard() {
   const fetchUserInfo = async () => {
     try {
       const res = await axios.get(
-        "https://quietconnect-backend.onrender.com/api/user/user-info",
+        "/proxy/api/user/user-info",
         { withCredentials: true }
       );
 
@@ -48,7 +48,7 @@ function ProfileWizard() {
 
     try {
       await axios.put(
-        "https://quietconnect-backend.onrender.com/api/user/change_info",
+        "/proxy/api/user/change_info",
         { username: name, bio },
         { withCredentials: true }
       );

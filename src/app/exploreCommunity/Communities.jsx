@@ -26,7 +26,7 @@ function Communities() {
   const fetchAll = async (pageNo = 0) => {
     try {
       const res = await axios.get(
-        'https://quietconnect-backend.onrender.com/api/community/getAll',
+        '/proxy/api/community/getAll',
         {
           params: { page: pageNo, size: 9 },
           withCredentials: true,
@@ -43,7 +43,7 @@ function Communities() {
   const fetchPopAll = async (pageNo = 0) => {
     try {
       const res = await axios.get(
-        'https://quietconnect-backend.onrender.com/api/community/getPop',
+        '/proxy/api/community/getPop',
         {
           params: { page: pageNo, size: 9 },
           withCredentials: true,
@@ -60,7 +60,7 @@ function Communities() {
   const fetchJoined = async () => {
     try {
       const res = await axios.get(
-        'https://quietconnect-backend.onrender.com/api/community/joinedCom',
+        '/proxy/api/community/joinedCom',
         { withCredentials: true }
       )
       setJoinedCommunities(res.data)
@@ -77,8 +77,8 @@ function Communities() {
     try {
       const url =
         activeTab === 'Popular'
-          ? `https://quietconnect-backend.onrender.com/api/community/searchPop/${value}`
-          : `https://quietconnect-backend.onrender.com/api/community/search/${value}`
+          ? `/proxy/api/community/searchPop/${value}`
+          : `/proxy/api/community/search/${value}`
 
       const res = await axios.get(url, { withCredentials: true })
 

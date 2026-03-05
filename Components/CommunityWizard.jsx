@@ -40,7 +40,7 @@ function CommunityWizard({ modal, setModal }) {
 
       try {
         const res = await axios.post(
-          "https://quietconnect-backend.onrender.com/api/community/create",
+          "/proxy/api/community/create",
           communityDetails,
           {
             headers: { 'Content-Type': 'application/json' },
