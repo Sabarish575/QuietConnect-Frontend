@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import SignUp from "../../Components/SignUp";
 import axios from "axios";
+import { useUser } from "@/context/UserContext";
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
 
   useEffect(() => {
     axios.get("https://quietconnect-backend.onrender.com/auth/me", {

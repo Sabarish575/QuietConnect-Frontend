@@ -9,27 +9,11 @@ function Profile({ user_info, onNext }) {
 
   const router = useRouter();
 
-  const {userId}=useUser();
+  const {userId,logout}=useUser();
 
 const handleLogout = async () => {
-  try {
-    const response = await fetch("/proxy/logout", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: "include" 
-    });
-
-    if (response.ok) {
-      clearToken();
-      router.push("/"); 
-    } else {
-      console.error("Logout failed on the server");
-    }
-  } catch (error) {
-    console.error("Network error during logout:", error);
-  }
+  logout();
+  router.push("/");
 };
   
 
