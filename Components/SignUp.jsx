@@ -3,7 +3,7 @@
 // components/GoogleSignInButton.jsx
 export default function SignUp() {
   const handleGoogleSignIn = () => {
-    window.location.href = "/proxy/oauth2/authorization/google";
+    window.location.href = "https://quietconnect-backend.onrender.com/oauth2/authorization/google";
   };
 
   return (
