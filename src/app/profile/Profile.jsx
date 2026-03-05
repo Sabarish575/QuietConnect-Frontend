@@ -4,6 +4,7 @@ import { SquarePenIcon, Battery, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { clearToken } from "@/lib/auth";
+import axios from "axios";
 
 function Profile({ user_info, onNext }) {
 
