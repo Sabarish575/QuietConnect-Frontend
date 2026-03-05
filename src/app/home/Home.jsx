@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
-import { extractAndStoreToken } from "@/lib/auth";
+import { clearToken, extractAndStoreToken, getToken } from "@/lib/auth";
 
 /* ------------------ Helpers ------------------ */
 function Avatar({ name, onClick }) {
@@ -242,7 +242,12 @@ export default function Home() {
 
   
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true),
+    extractAndStoreToken();
+  }, []);
+
+
   useEffect(() => {
     if (mounted && !username && !userLoading) {
       router.replace("/");
@@ -257,11 +262,15 @@ export default function Home() {
 
 
     try {
+      const token=getToken();
+
       const res = await axios.get(
         "/proxy/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
-          withCredentials: true,
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
         }
       );
 
@@ -277,8 +286,6 @@ export default function Home() {
       } else {
         pageRef.current += 1;
       }
-
-      // sessionStorage.removeItem("pending_token");
     } catch (err) {
       console.log(err.response?.data || err.message);
     } finally {
