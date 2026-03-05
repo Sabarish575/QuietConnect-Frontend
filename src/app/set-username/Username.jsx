@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useUser } from "@/context/UserContext";
+import { extractAndStoreToken } from "@/lib/auth";
 
 
 export default function Username() {
@@ -13,6 +14,10 @@ export default function Username() {
   const bioRef = useRef(null);
 
   const router=useRouter();
+  useEffect(() => {
+        extractAndStoreToken();
+    }, []);
+
   const { updateUser }=useUser();
 
   const handleClick = async () => {

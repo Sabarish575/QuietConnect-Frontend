@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { extractAndStoreToken } from "@/lib/auth";
 
 /* ------------------ Helpers ------------------ */
 function Avatar({ name, onClick }) {
@@ -238,6 +239,11 @@ export default function Home() {
   const { username, loading:userLoading } = useUser();
   
   const router = useRouter();
+
+    useEffect(() => {
+          extractAndStoreToken();
+      }, []);
+  
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
