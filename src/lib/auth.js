@@ -8,7 +8,7 @@ export function extractAndStoreToken(){
 
 
     if(token){
-        sessionStorage.setItem("pending_token",token);
+        localStorage.setItem("pending_token",token);
         document.cookie=`token=${token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=None; Secure`;
         window.history.replaceState({},"",window.location.pathname);
     }
@@ -22,6 +22,9 @@ export function getToken() {
 
     if(cookie) return cookie;
 
-    return sessionStorage.getItem("pending_token");
-    
+    return localStorage.getItem("pending_token");
+}
+
+export function clearToken() {
+    localStorage.removeItem("token");
 }

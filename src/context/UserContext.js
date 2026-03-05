@@ -1,6 +1,6 @@
 "use client";
 
-import { extractAndStoreToken, getToken } from "@/lib/auth";
+import { clearToken, extractAndStoreToken, getToken } from "@/lib/auth";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -39,6 +39,9 @@ export default function UserProvider({ children }) {
         setUser(res.data);
       } catch (error) {
         console.log(error);
+        if(error?.response?.status===401){
+          clearToken();
+        }
       } finally {
         setLoading(false);
       }
