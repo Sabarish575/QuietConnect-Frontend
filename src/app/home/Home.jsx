@@ -66,7 +66,7 @@ function EnergyProfile() {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "https://quietconnect-backend.onrender.com/api/user/userCard",
+          "/proxy/api/user/userCard",
           { withCredentials: true }
         );
         setUserCard(res.data);
@@ -115,13 +115,13 @@ function EnergyProfile() {
 function RightStats() {
   const [postStat, setPostStat] = useState({});
   const { userId } = useUser(); 
-  const router = useRouter();     // 👈 router
+  const router = useRouter();
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const res = await axios.get(
-          "https://quietconnect-backend.onrender.com/api/user/userStat",
+          "/proxy/api/user/userStat",
           { withCredentials: true }
         );
         setPostStat(res.data);
@@ -255,15 +255,15 @@ export default function Home() {
     fetchingRef.current = true;
     setLoading(true);
 
-    const token=sessionStorage.getItem("pending_token");
+    // const token=sessionStorage.getItem("pending_token");
 
     try {
       const res = await axios.get(
-        "https://quietconnect-backend.onrender.com/api/userFeed",
+        "/proxy/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
           withCredentials: true,
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
+          // headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
 
@@ -280,7 +280,7 @@ export default function Home() {
         pageRef.current += 1;
       }
 
-      sessionStorage.removeItem("pending_token");
+      // sessionStorage.removeItem("pending_token");
     } catch (err) {
       console.log(err.response?.data || err.message);
     } finally {
@@ -291,7 +291,7 @@ export default function Home() {
 
   useEffect(() => {
     if (mounted) {
-      extractAndStoreToken();
+      // extractAndStoreToken();
       fetchFeed();
     }
   }, [mounted, fetchFeed]);

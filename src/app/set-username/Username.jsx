@@ -5,8 +5,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useUser } from "@/context/UserContext";
-import { extractAndStoreToken } from "@/lib/auth";
-
 
 export default function Username() {
 
@@ -14,9 +12,9 @@ export default function Username() {
   const bioRef = useRef(null);
 
   const router=useRouter();
-  useEffect(() => {
-        extractAndStoreToken();
-    }, []);
+  // useEffect(() => {
+  //       extractAndStoreToken();
+  //   }, []);
 
   const { updateUser }=useUser();
 
@@ -30,24 +28,19 @@ export default function Username() {
       toast.error("Username is required");
       return;
     }
-
-    const token=sessionStorage.getItem("pending_token");
-    console.log("from username ", token);
     
     try {
       const res = await axios.post(
-        "https://quietconnect-backend.onrender.com/api/user/name",
+        "/proxy/api/user/name",
         {
           username,
           bio,
         },
         {
           withCredentials: true,
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
 
-      sessionStorage.removeItem("pending_token");
 
       updateUser({username,bio});
 
