@@ -14,15 +14,22 @@ export default function UserProvider({ children }) {
   });
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
 
-    const fetchUserInfo = async () => {
+    
 
+    const fetchUserInfo = async () => {
+      extractAndStoreToken();
+      const token=getToken();
       try {
         const res = await axios.get(
           "/proxy/api/user/username",
           {
             withCredentials: true,
+            headers:{
+            Authorization: `Bearer ${token}`
+          }
           }
         );
         setUser(res.data);

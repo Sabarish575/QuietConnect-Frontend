@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useUser } from "@/context/UserContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { extractAndStoreToken, getToken } from "@/lib/auth";
 
 function Header2() {
   const [open, setOpen] = useState(false);
@@ -51,12 +52,15 @@ function Header2() {
   }, []);
 
   useEffect(()=>{
-
     const fetch=async ()=>{
       try {
-
+        const token=getToken();
       const res = await axios.get("/proxy/api/user/getPercentage",
-      {withCredentials: true});
+      {withCredentials: true,
+                  headers:{
+            Authorization: `Bearer ${token}`
+          }
+      });
 
       setEnergy(res.data || 0);
             
@@ -72,12 +76,12 @@ function Header2() {
 
   async function handleBattery(){
     try {
-
+const token=getToken();
       const res = await axios.post("/proxy/api/user/addBattery",
       energy,
       {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
+        headers: { 'Content-Type': 'application/json',Authorization: `Bearer ${token}` },
+        
       }
     );
 
