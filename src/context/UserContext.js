@@ -16,23 +16,24 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
 
-    // extractAndStoreToken();
+    extractAndStoreToken();
 
     const fetchUserInfo = async () => {
       
-      // const token=getToken();
+      const token=getToken();
       
-      // if(!token){
-      //   setLoading(false);
-      //   return;
-      // }
+      if(!token){
+        setLoading(false);
+        return;
+      }
       
       try {
         
 
         const res = await axios.get(
-          "/proxy/api/user/username",
+          "https://quietconnect-backend.onrender.com/api/user/username",
           { withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` }
            }
         );
         setUser(res.data);
