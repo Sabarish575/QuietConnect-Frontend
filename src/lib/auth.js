@@ -5,8 +5,7 @@ export function extractAndStoreToken(){
     const params=new URLSearchParams(window.location.search);
     const token=params.get("token");
 
-    console.log("this is your token ",token);
-    
+
 
     if(token){
         sessionStorage.setItem("pending_token",token);
