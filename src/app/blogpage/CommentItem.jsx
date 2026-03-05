@@ -230,7 +230,7 @@ function CommentItem({ comment }) {
             >
               <span className="font-semibold text-white">
                 {r.userName || "Unknown"}
-              </span>{"/n"}
+              </span>{"\n"}
               {r.reply}
             </div>
           ))}
