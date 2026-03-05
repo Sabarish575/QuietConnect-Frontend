@@ -12,7 +12,7 @@ export default function Page() {
 
 
   useEffect(() => {
-    axios.get("https://quietconnect-backend.onrender.com/auth/me", {
+    axios.get("/proxy/auth/me", {
       withCredentials: true,
     })
     .then(res => {

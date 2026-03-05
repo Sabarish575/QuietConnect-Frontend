@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/proxy/:path*",
-      "destination": "https://quietconnect-backend.onrender.com/:path*"
+      "destination": "/proxy/:path*"
     }
   ]
 }

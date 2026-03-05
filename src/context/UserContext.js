@@ -15,30 +15,20 @@ export default function UserProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    extractAndStoreToken();
 
     const fetchUserInfo = async () => {
-      const token = getToken();
-
-      if (!token) {
-        setLoading(false);
-        return;
-      }
 
       try {
         const res = await axios.get(
-          "https://quietconnect-backend.onrender.com/api/user/username",
+          "/proxy/api/user/username",
           {
             withCredentials: true,
-            headers: { Authorization: `Bearer ${token}` },
           }
         );
         setUser(res.data);
       } catch (error) {
         console.log(error);
-        if (error?.response?.status === 401) {
-          clearToken();
-        }
+
       } finally {
         setLoading(false);
       }
@@ -55,13 +45,8 @@ export default function UserProvider({ children }) {
     }));
   };
 
-  const logout = () => {
-    clearToken();
-    setUser({ userId: null, username: "", bio: "" });
-  };
-
   return (
-    <UserContext.Provider value={{ ...user, loading, updateUser, logout }}>
+    <UserContext.Provider value={{ ...user, loading, updateUser }}>
       {children}
     </UserContext.Provider>
   );

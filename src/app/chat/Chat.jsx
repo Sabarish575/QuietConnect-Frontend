@@ -85,7 +85,7 @@ export default function Chat({ autoOpenUserId }) {
   useEffect(() => {
     if (!currentUser) return;
 
-    const socket = new SockJS("https://quietconnect-backend.onrender.com/chat");
+    const socket = new SockJS("/proxy/chat");
 
     const stompClient = new Client({
       webSocketFactory: () => socket,

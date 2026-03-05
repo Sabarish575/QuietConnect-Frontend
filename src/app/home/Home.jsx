@@ -255,7 +255,6 @@ export default function Home() {
     fetchingRef.current = true;
     setLoading(true);
 
-    // const token=sessionStorage.getItem("pending_token");
 
     try {
       const res = await axios.get(
@@ -263,7 +262,6 @@ export default function Home() {
         {
           params: { page: pageRef.current, size: 10 },
           withCredentials: true,
-          // headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
 
