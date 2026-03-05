@@ -45,6 +45,11 @@ export default function UserProvider({ children }) {
     }));
   };
 
+  const logout = () => {
+    clearToken();
+    setUser({ userId: null, username: "", bio: "" });
+  };
+
   return (
     <UserContext.Provider value={{ ...user, loading, updateUser }}>
       {children}
