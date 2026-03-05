@@ -51,7 +51,7 @@ export default function Username() {
 
     } catch (error) {
       nameRef.current.value="";
-      console.log("this is your error",error);
+      console.log("this is your error", error);
       
       toast.error("Username already Exist");
     }
