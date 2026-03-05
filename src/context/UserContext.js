@@ -1,6 +1,6 @@
 "use client";
 
-import { extractAndStoreToken } from "@/lib/auth";
+import { extractAndStoreToken, getToken } from "@/lib/auth";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -19,11 +19,26 @@ export default function UserProvider({ children }) {
     extractAndStoreToken();
 
     const fetchUserInfo = async () => {
+      
+      const token=getToken();
+      
+      if(!token){
+        setLoading(false);
+        return;
+      }
+      
       try {
+
+        console.log("inside the request", token);
+        
+
         const res = await axios.get(
           "https://quietconnect-backend.onrender.com/api/user/username",
-          { withCredentials: true }
+          { withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` }
+           }
         );
+        sessionStorage.removeItem("pending_token");
         setUser(res.data);
       } catch (error) {
         console.log(error);
