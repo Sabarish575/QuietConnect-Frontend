@@ -240,9 +240,6 @@ export default function Home() {
   
   const router = useRouter();
 
-    useEffect(() => {
-          extractAndStoreToken();
-      }, []);
   
 
   useEffect(() => setMounted(true), []);
@@ -258,12 +255,15 @@ export default function Home() {
     fetchingRef.current = true;
     setLoading(true);
 
+    const token=sessionStorage.getItem("pending_token");
+
     try {
       const res = await axios.get(
         "https://quietconnect-backend.onrender.com/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
           withCredentials: true,
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
 
@@ -279,6 +279,8 @@ export default function Home() {
       } else {
         pageRef.current += 1;
       }
+
+      sessionStorage.removeItem("pending_token");
     } catch (err) {
       console.log(err.response?.data || err.message);
     } finally {
@@ -288,7 +290,10 @@ export default function Home() {
   }, [hasMore]);
 
   useEffect(() => {
-    if (mounted) fetchFeed();
+    if (mounted) {
+      extractAndStoreToken();
+      fetchFeed();
+    }
   }, [mounted, fetchFeed]);
 
   useEffect(() => {

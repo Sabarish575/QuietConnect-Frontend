@@ -31,6 +31,8 @@ export default function Username() {
       return;
     }
 
+    const token=sessionStorage.getItem("pending_token");
+
     try {
       const res = await axios.post(
         "https://quietconnect-backend.onrender.com/api/user/name",
@@ -40,8 +42,11 @@ export default function Username() {
         },
         {
           withCredentials: true,
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
         }
       );
+
+      sessionStorage.removeItem("pending_token");
 
       updateUser({username,bio});
 
