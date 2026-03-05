@@ -55,10 +55,16 @@ export default function Username() {
       }, 2000);
 
     } catch (error) {
-      nameRef.current.value="";
+      nameRef.current.value = "";
       console.log("this is your error", error);
-      
-      toast.error("Username already Exist");
+    
+      const status = error?.response?.status;
+      if (status === 401) {
+          toast.error("Session expired. Please login again.");
+          router.push("/");
+      } else {
+          toast.error("Username already taken. Try another.");
+      }
     }
   };
 
