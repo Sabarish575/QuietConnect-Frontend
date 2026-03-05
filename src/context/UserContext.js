@@ -1,5 +1,6 @@
 "use client";
 
+import { extractAndStoreToken } from "@/lib/auth";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -11,9 +12,12 @@ export default function UserProvider({ children }) {
     username: "",
     bio: "",
   });
-  const [loading, setLoading] = useState(true); // 👈 add this
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    extractAndStoreToken();
+
     const fetchUserInfo = async () => {
       try {
         const res = await axios.get(
@@ -24,7 +28,7 @@ export default function UserProvider({ children }) {
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(false); // 👈 always set false when done
+        setLoading(false);
       }
     };
 
