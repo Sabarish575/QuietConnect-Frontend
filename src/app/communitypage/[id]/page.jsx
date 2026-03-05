@@ -25,7 +25,7 @@ function Community() {
   useEffect(() => {
     if (!id) return;
     axios
-      .get(`https://quietconnect-backend.onrender.com/api/community/${id}`, {
+      .get(`/proxy/api/community/${id}`, {
         withCredentials: true,
       })
       
@@ -41,7 +41,7 @@ function Community() {
 
     try {
       const res = await axios.get(
-        `https://quietconnect-backend.onrender.com/api/getCommunityPosts/${id}`,
+        `/proxy/api/getCommunityPosts/${id}`,
         {
           params: { page, size: 10 },
           withCredentials: true,
