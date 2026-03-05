@@ -32,7 +32,7 @@ export default function Username() {
     }
 
     const token=sessionStorage.getItem("pending_token");
-    console.log(token);
+    console.log("from username ", token);
     
     try {
       const res = await axios.post(

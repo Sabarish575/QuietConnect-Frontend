@@ -38,7 +38,6 @@ export default function UserProvider({ children }) {
             headers: { Authorization: `Bearer ${token}` }
            }
         );
-        sessionStorage.removeItem("pending_token");
         setUser(res.data);
       } catch (error) {
         console.log(error);
