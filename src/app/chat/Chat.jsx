@@ -5,6 +5,7 @@ import axios from "axios";
 import { Send, ArrowLeft } from "lucide-react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import { getToken } from "@/lib/auth";
 
 export default function Chat({ autoOpenUserId }) {
   const [friends, setFriends] = useState([]);

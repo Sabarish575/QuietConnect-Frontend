@@ -9,6 +9,7 @@ import Banner from "../Banner";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { getToken } from "@/lib/auth";
 
 function Community() {
   const { id } = useParams();

@@ -7,6 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext"; // ✅ ADDED
+import { getToken } from "@/lib/auth";
 
 const PublicProfile = ({ id }) => {
   const router = useRouter();

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import CommunityWizard from '../../../Components/CommunityWizard'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { getToken } from '@/lib/auth'
 
 function Communities() {
   const [modal, setModal] = useState(false)
@@ -12,7 +13,6 @@ function Communities() {
   const [joinedCommunities, setJoinedCommunities] = useState([])
   const [activeTab, setActiveTab] = useState('All')
 
-  // 🔹 pagination
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
 
