@@ -15,10 +15,13 @@ function Page() {
 
     useEffect(() => {
     const getMe = async () => {
+        const token=getToken();
       try {
         const res = await axios.get(
           "/proxy/api/user/me",
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
         setCurrentUserId(res.data);
       } catch (error) {
@@ -31,12 +34,14 @@ function Page() {
 
   useEffect(() => {
     if (!id) return;
-
+      const token=getToken();
     const getPost = async () => {
       try {
         const res = await axios.get(
           `/proxy/api/getPosts/${id}`,
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
         setPost(res.data);
       } catch (error) {
@@ -52,14 +57,17 @@ function Page() {
 
 const handleLike = async () => {
   if (!post || loadingLike) return;
-
+    const token=getToken();
   setLoadingLike(true);
+
 
   try {
     const res = await axios.post(
       `/proxy/api/like/${id}`,
       {},
-      { withCredentials: true }
+      {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
     );
     setPost(prev => ({
       ...prev,

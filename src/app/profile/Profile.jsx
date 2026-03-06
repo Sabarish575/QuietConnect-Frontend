@@ -13,7 +13,11 @@ function Profile({ user_info, onNext }) {
   const {userId}=useUser();
 
 const handleLogout = async () => {
-    await axios.post("/proxy/logout", {}, { withCredentials: true });
+        const token=getToken();
+
+    await axios.post("/proxy/logout", {}, {                       headers:{
+            Authorization: `Bearer ${token}`
+          } });
     window.location.href = "/"; // full reload clears all state
 };
   

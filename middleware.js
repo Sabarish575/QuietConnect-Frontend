@@ -1,9 +1,10 @@
+import { getToken } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
 
 function middleware(request) {
 
-    const token=request.cookies.get("token")?.value;
+    const token=getToken();
 
     const protectedRoutes = [
     "/home",

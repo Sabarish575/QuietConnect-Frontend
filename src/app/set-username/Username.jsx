@@ -12,9 +12,9 @@ export default function Username() {
   const bioRef = useRef(null);
 
   const router=useRouter();
-  // useEffect(() => {
-  //       extractAndStoreToken();
-  //   }, []);
+  useEffect(() => {
+        extractAndStoreToken();
+    }, []);
 
   const { updateUser }=useUser();
 
@@ -28,6 +28,8 @@ export default function Username() {
       toast.error("Username is required");
       return;
     }
+        const token=getToken();
+
     
     try {
       const res = await axios.post(
@@ -37,7 +39,9 @@ export default function Username() {
           bio,
         },
         {
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }
       );
 

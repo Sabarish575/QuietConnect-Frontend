@@ -72,13 +72,19 @@ function CommunityHub() {
      FETCH COMMUNITIES
   ========================= */
   const fetchCommunities = async () => {
+        const token=getToken();
+
     try {
       const [createdRes, joinedRes] = await Promise.all([
         axios.get("/proxy/api/community/createdCom", {
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }),
         axios.get("/proxy/api/community/joinedCom", {
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }),
       ]);
 
@@ -98,12 +104,16 @@ function CommunityHub() {
      FETCH USER POSTS
   ========================= */
   const fetchUserPosts = async () => {
+        const token=getToken();
+
     try {
       const res = await axios.get(
         "/proxy/api/getUserCreatedPosts",
         {
           params: { page: page.posts, size: PAGE_SIZE },
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }
       );
 
@@ -125,12 +135,16 @@ function CommunityHub() {
      FETCH USER COMMENTS
   ========================= */
   const fetchUserComments = async () => {
+        const token=getToken();
+
     try {
       const res = await axios.get(
         "/proxy/api/getUserCommentedPosts",
         {
           params: { page: page.comments, size: PAGE_SIZE },
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }
       );
 
@@ -152,10 +166,14 @@ function CommunityHub() {
      DELETE COMMUNITY
   ========================= */
   const deleteCommunity = async (communityId) => {
+        const token=getToken();
+
     try {
       await axios.delete(
         `/proxy/api/community/delete/${communityId}`,
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       setData((prev) => ({

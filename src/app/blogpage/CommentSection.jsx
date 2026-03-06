@@ -25,16 +25,18 @@ function CommentSection({ postId }) {
   const loadComments = async (pageNo) => {
     if (loading || !hasMore) return;
 
-    // 🚫 stop duplicate initial call
     if (pageNo === 0 && initialLoadRef.current) return;
     if (pageNo === 0) initialLoadRef.current = true;
+        const token=getToken();
 
     setLoading(true);
 
     try {
       const res = await axios.get(
         `/proxy/api/comments/${postId}?page=${pageNo}`,
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       const fetchedComments = res.data.content;
@@ -59,13 +61,15 @@ function CommentSection({ postId }) {
 
   const addComment = async () => {
     if (!commentText.trim()) return;
-
+        const token=getToken();
     setPosting(true);
     try {
       const res = await axios.post(
         `/proxy/api/addComment`,
         { post_id: postId, comment: commentText },
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       

@@ -56,8 +56,8 @@ function Header2() {
       try {
         const token=getToken();
       const res = await axios.get("/proxy/api/user/getPercentage",
-      {withCredentials: true,
-                  headers:{
+      {
+        headers:{
             Authorization: `Bearer ${token}`
           }
       });

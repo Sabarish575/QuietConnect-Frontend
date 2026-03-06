@@ -12,8 +12,12 @@ export default function Page() {
 
 
   useEffect(() => {
+        const token=getToken();
+
     axios.get("/proxy/auth/me", {
-      withCredentials: true,
+                            headers:{
+            Authorization: `Bearer ${token}`
+          },
     })
     .then(res => {
       const user = res.data;

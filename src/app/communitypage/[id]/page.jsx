@@ -24,9 +24,13 @@ function Community() {
   /* Fetch Community */
   useEffect(() => {
     if (!id) return;
+        const token=getToken();
+
     axios
       .get(`/proxy/api/community/${id}`, {
-        withCredentials: true,
+                              headers:{
+            Authorization: `Bearer ${token}`
+          },
       })
       
       .then(res => setCommunity(res.data))
@@ -38,13 +42,17 @@ function Community() {
   const fetchPosts = async () => {
     if (loading || !hasMore) return;
     setLoading(true);
+        const token=getToken();
+
 
     try {
       const res = await axios.get(
         `/proxy/api/getCommunityPosts/${id}`,
         {
           params: { page, size: 10 },
-          withCredentials: true,
+                                headers:{
+            Authorization: `Bearer ${token}`
+          },
         }
       );
 

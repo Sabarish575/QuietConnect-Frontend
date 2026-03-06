@@ -22,10 +22,14 @@ function Banner({ Community, id }) {
 
     // check joined status
     const checkJoined = async () => {
+        const token=getToken();
+
       try {
         const res = await axios.get(
           `/proxy/api/community/check/${id}`,
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
         setJoined(res.data);
       } catch {
@@ -53,11 +57,15 @@ function Banner({ Community, id }) {
   }
 
   async function handleJoinandUnjoin() {
+        const token=getToken();
+
     try {
       const res = await axios.post(
         `/proxy/api/community/joinandunjoin/${id}`,
         {},
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       const message = res.data;

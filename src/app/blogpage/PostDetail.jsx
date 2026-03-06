@@ -30,12 +30,12 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
 
   const isOwner = post?.createdBy?.userId === currentUserId;
 
-  /* ✅ SAVE EDIT */
   const handleSave = async () => {
     if (!title.trim() || !description.trim()) {
       toast.error("Title and description cannot be empty");
       return;
     }
+        const token=getToken();
 
     setLoadingEdit(true);
 
@@ -43,7 +43,9 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
       const res = await axios.patch(
         `/proxy/api/editPost/${post.id}`,
         { title, description },
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       /* ✅ Update parent state instead of mutating props */

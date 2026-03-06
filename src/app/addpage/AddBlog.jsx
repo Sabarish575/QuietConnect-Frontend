@@ -1,5 +1,6 @@
 "use client";
 
+import { getToken } from "@/lib/auth";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useRef, useState } from "react";
@@ -19,6 +20,8 @@ function AddBlogContent() {
   const [isMember, setIsMember] = useState(null);
   const [checkingMember, setCheckingMember] = useState(false);
   const [joining, setJoining] = useState(false);
+
+
 
   /* Preselect community from params */
   useEffect(() => {
@@ -63,13 +66,18 @@ function AddBlogContent() {
       return;
     }
 
+    
+
     const checkMembership = async () => {
+        const token=getToken();
       try {
         setCheckingMember(true);
 
         const res = await axios.get(
           `/proxy/api/isMember/${com.id}`,
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
 
         setIsMember(res.data);
@@ -88,13 +96,17 @@ function AddBlogContent() {
   const handleJoinToggle = async () => {
     if (!com?.id) return;
 
+      const token=getToken();
+
     try {
       setJoining(true);
 
       const res = await axios.post(
         `/proxy/api/community/joinandunjoin/${com.id}`,
         {},
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       if (res.data === "followed") {
@@ -131,13 +143,16 @@ function AddBlogContent() {
       description: descRef.current?.value,
     };
 
+      const token=getToken();
+
     try {
       const res = await axios.post(
         "/proxy/api/addPosts",
         sendPost,
         {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          headers: { "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
         }
       );
 
@@ -170,10 +185,13 @@ function AddBlogContent() {
 
   const handleSuggestion = debounce(async (query) => {
     if (!query.trim()) return setSuggestion([]);
+      const token=getToken();
     try {
       const res = await axios.get(
         `/proxy/api/community/search/${query}`,
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
       setSuggestion(res.data);
     } catch {

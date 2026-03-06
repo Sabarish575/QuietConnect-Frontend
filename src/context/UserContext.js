@@ -26,7 +26,6 @@ export default function UserProvider({ children }) {
         const res = await axios.get(
           "/proxy/api/user/username",
           {
-            withCredentials: true,
             headers:{
             Authorization: `Bearer ${token}`
           }

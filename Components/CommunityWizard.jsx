@@ -6,6 +6,7 @@ import CommunitySelection from './CommunitySelection';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { getToken } from '@/lib/auth';
 
 function CommunityWizard({ modal, setModal }) {
   const router = useRouter();
@@ -32,6 +33,8 @@ function CommunityWizard({ modal, setModal }) {
         return;
       }
 
+      const token=getToken();
+
       const communityDetails = {
         communityTitle: title,
         communityBio: desc,
@@ -42,9 +45,11 @@ function CommunityWizard({ modal, setModal }) {
         const res = await axios.post(
           "/proxy/api/community/create",
           communityDetails,
-          {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true
+            {
+            headers: { 'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+            } ,
+           
           }
         );
 

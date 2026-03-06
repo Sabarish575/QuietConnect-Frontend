@@ -22,10 +22,14 @@ const PublicProfile = ({ id }) => {
   // ================= FETCH USER DATA =================
   useEffect(() => {
     async function fetchUser() {
+        const token=getToken();
+
       try {
         const res = await axios.get(
           `/proxy/api/user/user-data/${id}`,
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
         setUserdata(res.data);
       } catch (error) {
@@ -41,10 +45,14 @@ const PublicProfile = ({ id }) => {
     if (!id) return;
 
     const fetchScore = async () => {
+        const token=getToken();
+
       try {
         const res = await axios.get(
           `/proxy/api/score/getReputation/${id}`,
-          { withCredentials: true }
+          {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
         );
         setScore(res.data);
       } catch (error) {
@@ -60,13 +68,17 @@ const PublicProfile = ({ id }) => {
   const handleToggleFollow = async () => {
     if (loadingFollow || isOwnProfile) return; // ✅ Prevent self-follow
 
+        const token=getToken();
+
     try {
       setLoadingFollow(true);
 
       const res = await axios.post(
         `/proxy/api/user/followandunfollow/${id}`,
         {},
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
 
       const message = res.data;

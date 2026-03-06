@@ -26,8 +26,12 @@ export default function Chat({ autoOpenUserId }) {
   /* ---------------- Current User ---------------- */
 
   useEffect(() => {
+        const token=getToken();
+
     axios
-      .get("/proxy/api/user/me", { withCredentials: true })
+      .get("/proxy/api/user/me", {                       headers:{
+            Authorization: `Bearer ${token}`
+          } })
       .then((res) => setCurrentUser(res.data))
       .catch(console.log);
   }, []);
@@ -39,10 +43,14 @@ export default function Chat({ autoOpenUserId }) {
   }, []);
 
   const fetchChatFriends = async () => {
+        const token=getToken();
+
     try {
       const res = await axios.get(
         "/proxy/api/chat/getFriend",
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
       setFriends(res.data || []);
     } catch (err) {
@@ -57,6 +65,9 @@ export default function Chat({ autoOpenUserId }) {
   useEffect(() => {
     if (!autoOpenUserId) return;
 
+        const token=getToken();
+
+
     const openChat = async () => {
       let userToOpen = friends.find(
         (u) => Number(u.userId) === Number(autoOpenUserId)
@@ -66,7 +77,9 @@ export default function Chat({ autoOpenUserId }) {
         try {
           const res = await axios.get(
             `/proxy/api/user/user-data/${autoOpenUserId}`,
-            { withCredentials: true }
+            {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
           );
           userToOpen = res.data;
         } catch (err) {
@@ -104,12 +117,10 @@ export default function Chat({ autoOpenUserId }) {
           }
         });
 
-        // 🔔 Notification — parse senderId from payload and mark that friend's dot
         stompClient.subscribe("/user/queue/notifications", (msg) => {
           console.log("🔔 Notification:", msg.body);
           try {
             const data = JSON.parse(msg.body);
-            // only show dot if that friend's chat isn't already open
             if (data!== activeUserRef.current?.userId) {
               setUnreadMap((prev) => ({
                 ...prev,
@@ -117,7 +128,6 @@ export default function Chat({ autoOpenUserId }) {
               }));
             }
           } catch {
-            // if backend sends a plain string (e.g. "new"), just log it
             console.log("Notification payload is not JSON:", msg.body);
           }
         });
@@ -139,10 +149,15 @@ export default function Chat({ autoOpenUserId }) {
       [user.userId]: false,
     }));
 
+        const token=getToken();
+
+
     try {
       const res = await axios.get(
         `/proxy/api/chat/getOldchat/${user.userId}`,
-        { withCredentials: true }
+        {                       headers:{
+            Authorization: `Bearer ${token}`
+          } }
       );
       setChats(res.data || []);
     } catch (err) {
