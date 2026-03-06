@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useUser } from "@/context/UserContext";
+import { extractAndStoreToken, getToken } from "@/lib/auth";
 
 export default function Username() {
 

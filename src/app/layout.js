@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
         <UserProvider>
           {children}
         </UserProvider>
+        <Analytics/>
       </body>
     </html>
   );

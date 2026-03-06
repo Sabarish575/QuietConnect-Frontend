@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import SignUp from "../../Components/SignUp";
 import axios from "axios";
 import { useUser } from "@/context/UserContext";
+import { extractAndStoreToken, getToken } from "@/lib/auth";
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -12,6 +13,7 @@ export default function Page() {
 
 
   useEffect(() => {
+    extractAndStoreToken();
         const token=getToken();
 
     axios.get("/proxy/auth/me", {
