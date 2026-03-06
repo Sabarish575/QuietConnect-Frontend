@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 import CommunityManagement from "./CommunityHub";
 import CommunityHub from "./CommunityHub";
+import { getToken } from "@/lib/auth";
 
 function ProfileWizard() {
   const [activeTab, setActiveTab] = useState("profile"); // profile | communities

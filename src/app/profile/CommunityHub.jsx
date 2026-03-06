@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import PostCard from "./PostCard";
+import { getToken } from "@/lib/auth";
 
 const TABS = [
   { key: "created", label: "Created" },
