@@ -16,12 +16,10 @@ export default function UserProvider({ children }) {
 
 
   useEffect(() => {
-
-    
-
-    const fetchUserInfo = async () => {
       extractAndStoreToken();
       const token=getToken();
+    const fetchUserInfo = async () => {
+
       try {
         const res = await axios.get(
           "/proxy/api/user/username",
