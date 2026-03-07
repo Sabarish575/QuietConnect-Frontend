@@ -57,6 +57,8 @@ export default function Username() {
           toast.error("Session expired. Please login again.");
           router.push("/");
       } else {
+        console.log(error);
+        
           toast.error("Username already taken. Try another.");
       }
     }
