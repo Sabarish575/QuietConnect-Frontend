@@ -68,11 +68,6 @@ function EnergyProfile() {
         const token = getToken()
         const res = await axios.get(
           "/proxy/api/user/userCard",
-          { 
-            headers:{
-              Authorization: `Bearer ${token}`
-              }
-           }
         );
         setUserCard(res.data);
       } catch (error) {
@@ -128,11 +123,6 @@ function RightStats() {
         
         const res = await axios.get(
           "/proxy/api/user/userStat",
-          { 
-                      headers:{
-            Authorization: `Bearer ${token}`
-          }
-           }
         );
         setPostStat(res.data);
       } catch (error) {
@@ -253,9 +243,7 @@ export default function Home() {
   
 
   useEffect(() => {
-    setMounted(true),
-    
-  }, []);
+    setMounted(true)}, []);
 
 
   useEffect(() => {
@@ -278,10 +266,6 @@ export default function Home() {
         "/proxy/api/userFeed",
         {
           params: { page: pageRef.current, size: 10 },
-          
-          headers:{
-            Authorization: `Bearer ${token}`
-          }
         }
       );
 
