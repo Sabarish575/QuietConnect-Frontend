@@ -30,18 +30,20 @@ async function handler(request, {params}){
     queryString ? "?" + queryString : ""
   }`;
 
-   const response = await fetch(targetUrl, {
-    method: request.method,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`, // cookie → header conversion happens here
-    },
-    // Step 7 — forward body for POST/PUT/PATCH
-    ...(request.method !== "GET" && { body: await request.text() }),
-  });
+try {
+    const response = await fetch(targetUrl, {
+        method: request.method,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+        },
+        ...(request.method !== "GET" && { body: await request.text() }),
+    });
 
-  const data = await response.json();
-  return NextResponse.json(data, { status: response.status });
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
+} catch (err) {
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
 }
 
 export const GET = handler;

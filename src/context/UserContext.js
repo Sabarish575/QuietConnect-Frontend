@@ -1,6 +1,5 @@
 "use client";
 
-import { clearToken, extractAndStoreToken, getToken } from "@/lib/auth";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -14,20 +13,13 @@ export default function UserProvider({ children }) {
   });
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
-      
     const fetchUserInfo = async () => {
-
       try {
-        const res = await axios.get(
-          "/proxy/api/user/username",
-         
-        );
+        const res = await axios.get("/proxy/api/user/username");
         setUser(res.data);
       } catch (error) {
         console.log(error);
-
       } finally {
         setLoading(false);
       }
@@ -44,13 +36,13 @@ export default function UserProvider({ children }) {
     }));
   };
 
-  const logout = () => {
-    clearToken();
+  const logout = async () => {
+    await axios.post("/proxy/api/auth/logout"); // clears cookie server-side
     setUser({ userId: null, username: "", bio: "" });
   };
 
   return (
-    <UserContext.Provider value={{ ...user, loading, updateUser }}>
+    <UserContext.Provider value={{ ...user, loading, updateUser, logout }}>
       {children}
     </UserContext.Provider>
   );

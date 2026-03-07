@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import React from 'react'
 
 export async function GET(request) {
 
@@ -11,8 +10,9 @@ export async function GET(request) {
     if(!tempToken){
         return NextResponse.redirect(new URL("/?error=missing_token",request.url));
     }
+    try {
 
-    const response=await fetch(
+   const response=await fetch(
         `https://quietconnect-backend.onrender.com/authExchange?token=${tempToken}`
     )
 
@@ -35,4 +35,8 @@ export async function GET(request) {
     });
 
     return redirectResponse;
+        
+    } catch (error) {
+        return NextResponse.redirect(new URL("/?error=server_error", request.url));
+    }
 }

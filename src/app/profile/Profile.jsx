@@ -10,12 +10,12 @@ function Profile({ user_info, onNext }) {
 
   const router = useRouter();
 
-  const {userId}=useUser();
+  const {userId,logout}=useUser();
 
 const handleLogout = async () => {
         
 
-    await axios.post("/proxy/logout", {});
+    await logout();
     window.location.href = "/"; 
 };
   
