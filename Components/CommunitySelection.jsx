@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { getToken } from '@/lib/auth';
 
 function CommunitySelection({ topicIds = [], setTopicIds, onPrev, handleSubmit, modal, handleClose }) {
   const [topics, setTopics] = useState([]);          // grouped topics by category
@@ -12,11 +11,9 @@ function CommunitySelection({ topicIds = [], setTopicIds, onPrev, handleSubmit, 
 
   useEffect(() => {
     const fetchTopics = async () => {
-      const token=getToken();
+      
       try {
-        const res = await axios.get("/proxy/api/topics", {                       headers:{
-            Authorization: `Bearer ${token}`
-          } });
+        const res = await axios.get("/proxy/api/topics");
         const topicsArray = Array.isArray(res.data) ? res.data : res.data.data;
 
         if (!Array.isArray(topicsArray)) { toast.error("Invalid topics data from backend"); return }

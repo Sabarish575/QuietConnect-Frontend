@@ -54,13 +54,8 @@ function Header2() {
   useEffect(()=>{
     const fetch=async ()=>{
       try {
-        const token=getToken();
-      const res = await axios.get("/proxy/api/user/getPercentage",
-      {
-        headers:{
-            Authorization: `Bearer ${token}`
-          }
-      });
+        
+      const res = await axios.get("/proxy/api/user/getPercentage");
 
       setEnergy(res.data || 0);
             
@@ -76,11 +71,11 @@ function Header2() {
 
   async function handleBattery(){
     try {
-const token=getToken();
+
       const res = await axios.post("/proxy/api/user/addBattery",
       energy,
       {
-        headers: { 'Content-Type': 'application/json',Authorization: `Bearer ${token}` },
+        headers: { 'Content-Type': 'application/json'},
         
       }
     );

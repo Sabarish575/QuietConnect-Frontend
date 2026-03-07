@@ -73,20 +73,12 @@ function CommunityHub() {
      FETCH COMMUNITIES
   ========================= */
   const fetchCommunities = async () => {
-        const token=getToken();
+        
 
     try {
       const [createdRes, joinedRes] = await Promise.all([
-        axios.get("/proxy/api/community/createdCom", {
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
-        }),
-        axios.get("/proxy/api/community/joinedCom", {
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
-        }),
+        axios.get("/proxy/api/community/createdCom"),
+        axios.get("/proxy/api/community/joinedCom"),
       ]);
 
       setData((prev) => ({
@@ -105,17 +97,13 @@ function CommunityHub() {
      FETCH USER POSTS
   ========================= */
   const fetchUserPosts = async () => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
         "/proxy/api/getUserCreatedPosts",
         {
-          params: { page: page.posts, size: PAGE_SIZE },
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
-        }
+          params: { page: page.posts, size: PAGE_SIZE } }
       );
 
       setData((prev) => ({
@@ -136,17 +124,13 @@ function CommunityHub() {
      FETCH USER COMMENTS
   ========================= */
   const fetchUserComments = async () => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
         "/proxy/api/getUserCommentedPosts",
         {
-          params: { page: page.comments, size: PAGE_SIZE },
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
-        }
+          params: { page: page.comments, size: PAGE_SIZE }}
       );
 
       setData((prev) => ({
@@ -167,14 +151,11 @@ function CommunityHub() {
      DELETE COMMUNITY
   ========================= */
   const deleteCommunity = async (communityId) => {
-        const token=getToken();
+        
 
     try {
       await axios.delete(
-        `/proxy/api/community/delete/${communityId}`,
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        `/proxy/api/community/delete/${communityId}`
       );
 
       setData((prev) => ({

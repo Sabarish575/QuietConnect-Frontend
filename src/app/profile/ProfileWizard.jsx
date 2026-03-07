@@ -26,13 +26,10 @@ function ProfileWizard() {
   }, []);
 
   const fetchUserInfo = async () => {
-        const token=getToken();
+        
     try {
       const res = await axios.get(
-        "/proxy/api/user/user-info",
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        "/proxy/api/user/user-info"
       );
 
       setUser_info(res.data);
@@ -49,16 +46,13 @@ function ProfileWizard() {
       toast.error("Username is required");
       return;
     }
-        const token=getToken();
+        
 
 
     try {
       await axios.put(
         "/proxy/api/user/change_info",
-        { username: name, bio },
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        { username: name, bio }
       );
 
       setUser_info(prev => ({

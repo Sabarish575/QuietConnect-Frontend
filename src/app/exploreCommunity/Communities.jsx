@@ -24,16 +24,13 @@ function Communities() {
 
   /* ================= FETCH FUNCTIONS ================= */
   const fetchAll = async (pageNo = 0) => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
         '/proxy/api/community/getAll',
         {
           params: { page: pageNo, size: 9 },
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
         }
       )
       setCommunities(res.data.content)
@@ -45,16 +42,13 @@ function Communities() {
   }
 
   const fetchPopAll = async (pageNo = 0) => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
         '/proxy/api/community/getPop',
         {
           params: { page: pageNo, size: 9 },
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
         }
       )
       setPopularCommunities(res.data.content)
@@ -66,14 +60,11 @@ function Communities() {
   }
 
   const fetchJoined = async () => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
-        '/proxy/api/community/joinedCom',
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        '/proxy/api/community/joinedCom'
       )
       setJoinedCommunities(res.data)
       setTotalPages(0)
@@ -85,7 +76,7 @@ function Communities() {
   /* ================= SEARCH API ================= */
   const callApi = async (value) => {
     if (!value.trim()) return
-        const token=getToken();
+        
 
     try {
       const url =
@@ -93,9 +84,7 @@ function Communities() {
           ? `/proxy/api/community/searchPop/${value}`
           : `/proxy/api/community/search/${value}`
 
-      const res = await axios.get(url, {                       headers:{
-            Authorization: `Bearer ${token}`
-          } })
+      const res = await axios.get(url)
 
       if (activeTab === 'Popular') setPopularCommunities(res.data)
       else setCommunities(res.data)

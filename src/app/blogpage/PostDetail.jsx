@@ -35,17 +35,14 @@ function PostDetail({ post, onLike, currentUserId, setPost }) {
       toast.error("Title and description cannot be empty");
       return;
     }
-        const token=getToken();
+        
 
     setLoadingEdit(true);
 
     try {
       const res = await axios.patch(
         `/proxy/api/editPost/${post.id}`,
-        { title, description },
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        { title, description }
       );
 
       /* ✅ Update parent state instead of mutating props */

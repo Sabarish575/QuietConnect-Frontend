@@ -25,14 +25,10 @@ function Community() {
   /* Fetch Community */
   useEffect(() => {
     if (!id) return;
-        const token=getToken();
+        
 
     axios
-      .get(`/proxy/api/community/${id}`, {
-                              headers:{
-            Authorization: `Bearer ${token}`
-          },
-      })
+      .get(`/proxy/api/community/${id}`)
       
       .then(res => setCommunity(res.data))
       .catch(console.error);
@@ -43,7 +39,7 @@ function Community() {
   const fetchPosts = async () => {
     if (loading || !hasMore) return;
     setLoading(true);
-        const token=getToken();
+        
 
 
     try {
@@ -51,9 +47,6 @@ function Community() {
         `/proxy/api/getCommunityPosts/${id}`,
         {
           params: { page, size: 10 },
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
         }
       );
 

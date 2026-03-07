@@ -13,10 +13,6 @@ export default function Username() {
   const bioRef = useRef(null);
 
   const router=useRouter();
-  useEffect(() => {
-        extractAndStoreToken();
-    }, []);
-
   const { updateUser }=useUser();
 
   const handleClick = async () => {
@@ -29,7 +25,7 @@ export default function Username() {
       toast.error("Username is required");
       return;
     }
-        const token=getToken();
+        
 
     
     try {

@@ -69,7 +69,7 @@ function AddBlogContent() {
     
 
     const checkMembership = async () => {
-        const token=getToken();
+        
       try {
         setCheckingMember(true);
 
@@ -96,17 +96,14 @@ function AddBlogContent() {
   const handleJoinToggle = async () => {
     if (!com?.id) return;
 
-      const token=getToken();
+      
 
     try {
       setJoining(true);
 
       const res = await axios.post(
         `/proxy/api/community/joinandunjoin/${com.id}`,
-        {},
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        {}
       );
 
       if (res.data === "followed") {
@@ -143,16 +140,14 @@ function AddBlogContent() {
       description: descRef.current?.value,
     };
 
-      const token=getToken();
+      
 
     try {
       const res = await axios.post(
         "/proxy/api/addPosts",
         sendPost,
         {
-          headers: { "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
+          headers: { "Content-Type": "application/json"},
         }
       );
 
@@ -185,14 +180,10 @@ function AddBlogContent() {
 
   const handleSuggestion = debounce(async (query) => {
     if (!query.trim()) return setSuggestion([]);
-      const token=getToken();
+      
     try {
       const res = await axios.get(
-        `/proxy/api/community/search/${query}`,
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
-      );
+        `/proxy/api/community/search/${query}`);
       setSuggestion(res.data);
     } catch {
       setSuggestion([]);

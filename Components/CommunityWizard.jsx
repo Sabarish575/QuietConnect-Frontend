@@ -6,8 +6,6 @@ import CommunitySelection from './CommunitySelection';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { getToken } from '@/lib/auth';
-
 function CommunityWizard({ modal, setModal }) {
   const router = useRouter();
 
@@ -33,7 +31,7 @@ function CommunityWizard({ modal, setModal }) {
         return;
       }
 
-      const token=getToken();
+      
 
       const communityDetails = {
         communityTitle: title,
@@ -47,7 +45,6 @@ function CommunityWizard({ modal, setModal }) {
           communityDetails,
             {
             headers: { 'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
             } ,
            
           }

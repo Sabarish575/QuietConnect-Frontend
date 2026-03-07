@@ -125,7 +125,7 @@ function RightStats() {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const token=getToken();
+        
         const res = await axios.get(
           "/proxy/api/user/userStat",
           { 
@@ -254,7 +254,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true),
-    extractAndStoreToken();
+    
   }, []);
 
 
@@ -272,7 +272,7 @@ export default function Home() {
 
 
     try {
-      const token=getToken();
+      
 
       const res = await axios.get(
         "/proxy/api/userFeed",
@@ -307,7 +307,7 @@ export default function Home() {
 
   useEffect(() => {
     if (mounted) {
-      // extractAndStoreToken();
+      // 
       fetchFeed();
     }
   }, [mounted, fetchFeed]);

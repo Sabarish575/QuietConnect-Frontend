@@ -44,14 +44,11 @@ function CommentItem({ comment }) {
   /* 🔹 Load replies */
   const loadReplies = async () => {
     if (loadingReplies) return;
-        const token=getToken();
+        
     setLoadingReplies(true);
     try {
       const res = await axios.get(
-        `/proxy/api/getReply/${comment.id}`,
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        `/proxy/api/getReply/${comment.id}`
       );
       mergeReplies(res.data);
     } catch (err) {
@@ -72,7 +69,7 @@ function CommentItem({ comment }) {
   /* 🔹 Add reply */
   const addReply = async () => {
     if (!replyText.trim()) return;
-        const token=getToken();
+        
     setPostingReply(true);
     try {
       await axios.post(
@@ -80,10 +77,7 @@ function CommentItem({ comment }) {
         {
           comment_id: comment.id,
           reply: replyText,
-        },
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        }
       );
 
       setReplyText("");

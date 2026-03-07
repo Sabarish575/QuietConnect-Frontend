@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 function middleware(request) {
 
-    const token=getToken();
+    
 
     const protectedRoutes = [
     "/home",

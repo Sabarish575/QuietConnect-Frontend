@@ -27,12 +27,10 @@ export default function Chat({ autoOpenUserId }) {
   /* ---------------- Current User ---------------- */
 
   useEffect(() => {
-        const token=getToken();
+        
 
     axios
-      .get("/proxy/api/user/me", {                       headers:{
-            Authorization: `Bearer ${token}`
-          } })
+      .get("/proxy/api/user/me")
       .then((res) => setCurrentUser(res.data))
       .catch(console.log);
   }, []);
@@ -44,14 +42,11 @@ export default function Chat({ autoOpenUserId }) {
   }, []);
 
   const fetchChatFriends = async () => {
-        const token=getToken();
+        
 
     try {
       const res = await axios.get(
-        "/proxy/api/chat/getFriend",
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        "/proxy/api/chat/getFriend"
       );
       setFriends(res.data || []);
     } catch (err) {
@@ -66,7 +61,7 @@ export default function Chat({ autoOpenUserId }) {
   useEffect(() => {
     if (!autoOpenUserId) return;
 
-        const token=getToken();
+        
 
 
     const openChat = async () => {
@@ -77,11 +72,7 @@ export default function Chat({ autoOpenUserId }) {
       if (!userToOpen) {
         try {
           const res = await axios.get(
-            `/proxy/api/user/user-data/${autoOpenUserId}`,
-            {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
-          );
+            `/proxy/api/user/user-data/${autoOpenUserId}`);
           userToOpen = res.data;
         } catch (err) {
           return;
@@ -150,15 +141,12 @@ export default function Chat({ autoOpenUserId }) {
       [user.userId]: false,
     }));
 
-        const token=getToken();
+        
 
 
     try {
       const res = await axios.get(
-        `/proxy/api/chat/getOldchat/${user.userId}`,
-        {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+        `/proxy/api/chat/getOldchat/${user.userId}`
       );
       setChats(res.data || []);
     } catch (err) {
