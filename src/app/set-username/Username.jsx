@@ -34,11 +34,6 @@ export default function Username() {
         {
           username,
           bio,
-        },
-        {
-                                headers:{
-            Authorization: `Bearer ${token}`
-          },
         }
       );
 
