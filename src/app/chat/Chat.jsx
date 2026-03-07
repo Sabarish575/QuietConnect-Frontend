@@ -89,47 +89,55 @@ export default function Chat({ autoOpenUserId }) {
 
   useEffect(() => {
     if (!currentUser) return;
+    const connectWebSocket=async ()=>{
 
-    const socket = new SockJS("/proxy/chat");
+      const res=await axios.get("/api/auth/token");
+      const token=res.data.token;
 
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 5000,
+      const socket = new SockJS(`https://quietconnect-backend.onrender.com/chat?token=${token}`);
 
-      onConnect: () => {
-        stompClient.subscribe("/user/queue/messages", (msg) => {
-          const data = JSON.parse(msg.body);
-          setChats((prev) => [...prev, data]);
-
-          if (data.senderId !== activeUserRef.current?.userId) {
-            setUnreadMap((prev) => ({
-              ...prev,
-              [data.senderId]: true,
-            }));
-          }
-        });
-
-        stompClient.subscribe("/user/queue/notifications", (msg) => {
-          console.log("🔔 Notification:", msg.body);
-          try {
+      const stompClient = new Client({
+        webSocketFactory: () => socket,
+        reconnectDelay: 5000,
+        connectHeaders:{
+          Authorization:`Bearer ${token}`
+        },
+        onConnect: () => {
+          stompClient.subscribe("/user/queue/messages", (msg) => {
             const data = JSON.parse(msg.body);
-            if (data!== activeUserRef.current?.userId) {
+            setChats((prev) => [...prev, data]);
+
+            if (data.senderId !== activeUserRef.current?.userId) {
               setUnreadMap((prev) => ({
                 ...prev,
-                [data]: true,
+                [data.senderId]: true,
               }));
             }
-          } catch {
-            console.log("Notification payload is not JSON:", msg.body);
-          }
-        });
-      },
-    });
+          });
 
-    stompClient.activate();
-    stompClientRef.current = stompClient;
+          stompClient.subscribe("/user/queue/notifications", (msg) => {
+            console.log("🔔 Notification:", msg.body);
+            try {
+              const data = JSON.parse(msg.body);
+              if (data!== activeUserRef.current?.userId) {
+                setUnreadMap((prev) => ({
+                  ...prev,
+                  [data]: true,
+                }));
+              }
+            } catch {
+              console.log("Notification payload is not JSON:", msg.body);
+            }
+          });
+        },
+      });
 
-    return () => stompClient.deactivate();
+      stompClient.activate();
+      stompClientRef.current = stompClient;
+    }
+
+    connectWebSocket();
+    return () => stompClientRef.current?.deactivate();
   }, [currentUser]);
 
   /* ---------------- Fetch Chat ---------------- */
@@ -140,9 +148,6 @@ export default function Chat({ autoOpenUserId }) {
       ...prev,
       [user.userId]: false,
     }));
-
-        
-
 
     try {
       const res = await axios.get(
