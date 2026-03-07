@@ -74,10 +74,7 @@ function AddBlogContent() {
         setCheckingMember(true);
 
         const res = await axios.get(
-          `/proxy/api/isMember/${com.id}`,
-          {                       headers:{
-            Authorization: `Bearer ${token}`
-          } }
+          `/proxy/api/isMember/${com.id}`
         );
 
         setIsMember(res.data);
