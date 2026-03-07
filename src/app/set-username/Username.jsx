@@ -36,7 +36,10 @@ export default function Username() {
         }
       );
 
-
+      console.log(username);
+      console.log(bio);
+      
+      
       updateUser({username,bio});
 
       toast.success("Profile completed successfully!");
@@ -56,7 +59,9 @@ export default function Username() {
       if (status === 401) {
           toast.error("Session expired. Please login again.");
           router.push("/");
-      } else {
+      }else if (status === 503) {
+    toast.error("Server is waking up, please try again in a moment.");
+  } else {
         console.log(error);
         
           toast.error("Username already taken. Try another.");

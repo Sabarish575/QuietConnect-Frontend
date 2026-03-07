@@ -10,9 +10,6 @@ async function handler(request, { params }) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  console.log("from proxy this is your jwt", jwt);
-  
-
   const proxyPath = params.proxy.join("/");
   const { searchParams } = new URL(request.url);
   const queryString = searchParams.toString();
@@ -22,21 +19,43 @@ async function handler(request, { params }) {
   }`;
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000); // 25s timeout
+
     const response = await fetch(targetUrl, {
       method: request.method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
       },
+      signal: controller.signal,
       ...(request.method !== "GET" && { body: await request.text() }),
     });
 
-    const data = await response.json();
-    return NextResponse.json(data, { status: response.status });
+    clearTimeout(timeout);
+
+    const contentType = response.headers.get("content-type");
+    const data = contentType?.includes("application/json")
+      ? await response.json()
+      : { message: await response.text() };
+
+    return NextResponse.json(
+      typeof data === "string" ? { message: data } : data,
+      { status: response.status }
+    );
+
   } catch (err) {
+    console.log("Proxy error:", err.message);
+    if (err.name === "AbortError") {
+      return NextResponse.json(
+        { error: "Backend is waking up, please retry" },
+        { status: 503 }
+      );
+    }
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
+
 export const GET = handler;
 export const POST = handler;
 export const PUT = handler;
