@@ -28,7 +28,6 @@ function Banner({ Community, id }) {
       try {
         const res = await axios.get(
           `/proxy/api/community/check/${id}`,
-          
         );
         setJoined(res.data);
       } catch {
@@ -64,9 +63,9 @@ function Banner({ Community, id }) {
         {}
       );
 
-      const message = res.data;
+      const message = res.data.message;
 
-      if (message.startsWith("f")) {
+      if (message==="followed") {
         toast.success("Followed successfully");
         setMembers(prev => prev + 1);
         setJoined(true);
