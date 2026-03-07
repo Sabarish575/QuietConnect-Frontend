@@ -10,6 +10,9 @@ async function handler(request, { params }) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  console.log("from proxy this is your jwt", jwt);
+  
+
   const proxyPath = params.proxy.join("/");
   const { searchParams } = new URL(request.url);
   const queryString = searchParams.toString();
