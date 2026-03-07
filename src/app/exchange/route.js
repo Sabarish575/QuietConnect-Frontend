@@ -22,6 +22,9 @@ export async function GET(request) {
     
     const { jwt }=await response.json();
 
+    console.log("your jwt ",jwt);
+    
+
     const destination=redirect==="set-username" ? "/set-username" : "/home";
 
     const redirectResponse=NextResponse.redirect(new URL(destination,request.url));
