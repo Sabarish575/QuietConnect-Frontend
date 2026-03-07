@@ -103,6 +103,8 @@ function AddBlogContent() {
         {}
       );
 
+      console.log("your response from add blog",res.data);
+      
       if (res.data === "followed") {
         toast.success("Joined successfully!");
         setIsMember(true);
