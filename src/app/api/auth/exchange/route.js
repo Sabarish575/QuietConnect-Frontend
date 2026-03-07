@@ -7,6 +7,9 @@ export async function GET(request) {
     const tempToken=searchParams.get("token");
     const redirect=searchParams.get("redirect");
 
+    console.log("your temp token ",tempToken);
+    
+
     if(!tempToken){
         return NextResponse.redirect(new URL("/?error=missing_token",request.url));
     }
@@ -32,7 +35,7 @@ export async function GET(request) {
      redirectResponse.cookies.set("jwt", jwt, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 7,
     });
