@@ -37,7 +37,7 @@ export default function UserProvider({ children }) {
   };
 
   const logout = async () => {
-    await axios.post("/proxy/api/auth/logout"); // clears cookie server-side
+    await axios.post("/api/auth/logout");
     setUser({ userId: null, username: "", bio: "" });
   };
 
