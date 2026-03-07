@@ -77,6 +77,9 @@ function AddBlogContent() {
           `/proxy/api/isMember/${com.id}`
         );
 
+        console.log(res.data);
+        
+
         setIsMember(res.data);
       } catch (error) {
         console.error(error);
@@ -103,7 +106,7 @@ function AddBlogContent() {
         {}
       );
 
-      console.log("your response from add blog",res.data);
+      console.log("your response from add blog",res.data.message);
       
       if (res.data.message === "followed") {
         toast.success("Joined successfully!");
