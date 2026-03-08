@@ -45,7 +45,7 @@ async function handler(request, { params }) {
     );
 
   } catch (err) {
-    "Proxy error:", err.message);
+    console.log("Proxy error:", err.message);
     if (err.name === "AbortError") {
       return NextResponse.json(
         { error: "Backend is waking up, please retry" },

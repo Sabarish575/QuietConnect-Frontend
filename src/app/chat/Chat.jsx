@@ -48,11 +48,9 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         "/proxy/api/chat/getFriend"
       );
-      "friends data: ", res.data);
       
       setFriends(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
-      "friends error: ", err.response?.status);
       
       if (err.response?.status === 204) setFriends([]);
     } finally {
@@ -120,7 +118,6 @@ export default function Chat({ autoOpenUserId }) {
           });
 
           stompClient.subscribe("/user/queue/notifications", (msg) => {
-            console.log("🔔 Notification:", msg.body);
             try {
               const data = JSON.parse(msg.body);
               if (data!== activeUserRef.current?.userId) {
@@ -157,7 +154,6 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         `/proxy/api/chat/getOldchat/${user.userId}`
       );
-      "chats data", res.data);
       
       setChats(Array.isArray(res.data) ? res.data : []);
     } catch (err) {

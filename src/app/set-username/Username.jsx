@@ -35,11 +35,6 @@ export default function Username() {
           bio,
         }
       );
-
-      username);
-      bio);
-      
-      
       updateUser({username,bio});
 
       toast.success("Profile completed successfully!");
@@ -53,7 +48,7 @@ export default function Username() {
 
     } catch (error) {
       nameRef.current.value = "";
-      "this is your error", error);
+      console.log("this is your error", error);
     
       const status = error?.response?.status;
       if (status === 401) {
@@ -62,7 +57,6 @@ export default function Username() {
       }else if (status === 503) {
     toast.error("Server is waking up, please try again in a moment.");
   } else {
-        error);
         
           toast.error("Username already taken. Try another.");
       }
