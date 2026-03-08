@@ -48,8 +48,12 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         "/proxy/api/chat/getFriend"
       );
-      setFriends(res.data || []);
+      console.log("friends data: ", res.data);
+      
+      setFriends(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
+      console.log("friends error: ", err.response?.status);
+      
       if (err.response?.status === 204) setFriends([]);
     } finally {
       setLoading(false);
