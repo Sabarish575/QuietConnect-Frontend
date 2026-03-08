@@ -73,7 +73,7 @@ const PublicProfile = ({ id }) => {
         {}
       );
 
-      const message = res.data;
+      const message = res.data.message;
       setIsFollowing(message === "Following");
       toast.success(message);
     } catch (error) {
