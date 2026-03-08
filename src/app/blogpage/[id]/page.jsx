@@ -22,7 +22,7 @@ function Page() {
         );
         setCurrentUserId(res.data);
       } catch (error) {
-        "User not logged in");
+        toast.error("user not logged in")
       }
     };
 
