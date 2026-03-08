@@ -157,9 +157,12 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         `/proxy/api/chat/getOldchat/${user.userId}`
       );
-      setChats(res.data || []);
+      console.log("chats data", res.data);
+      
+      setChats(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.log(err);
+      setChats([]);
     }
   };
 
