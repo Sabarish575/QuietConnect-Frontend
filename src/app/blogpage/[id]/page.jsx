@@ -22,7 +22,7 @@ function Page() {
         );
         setCurrentUserId(res.data);
       } catch (error) {
-        console.log("User not logged in");
+        "User not logged in");
       }
     };
 

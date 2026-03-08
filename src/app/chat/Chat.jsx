@@ -48,11 +48,11 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         "/proxy/api/chat/getFriend"
       );
-      console.log("friends data: ", res.data);
+      "friends data: ", res.data);
       
       setFriends(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
-      console.log("friends error: ", err.response?.status);
+      "friends error: ", err.response?.status);
       
       if (err.response?.status === 204) setFriends([]);
     } finally {
@@ -157,7 +157,7 @@ export default function Chat({ autoOpenUserId }) {
       const res = await axios.get(
         `/proxy/api/chat/getOldchat/${user.userId}`
       );
-      console.log("chats data", res.data);
+      "chats data", res.data);
       
       setChats(Array.isArray(res.data) ? res.data : []);
     } catch (err) {

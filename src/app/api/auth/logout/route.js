@@ -8,7 +8,7 @@ export async function POST() {
     secure: true,
     sameSite: "strict",
     path: "/",
-    maxAge: 0,
+    maxAge: 60 * 60 * 24 * 7,
   });
 
   return response;

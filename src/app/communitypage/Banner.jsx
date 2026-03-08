@@ -31,7 +31,7 @@ function Banner({ Community, id }) {
         );
         setJoined(res.data);
       } catch {
-        console.log("Failed to fetch joined status");
+        "Failed to fetch joined status");
       }
     };
 

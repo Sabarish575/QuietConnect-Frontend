@@ -7,7 +7,7 @@ export async function GET(request) {
     const tempToken=searchParams.get("token");
     const redirect=searchParams.get("redirect");
 
-    console.log("your temp token ",tempToken);
+    "your temp token ",tempToken);
     
 
     if(!tempToken){
@@ -25,7 +25,7 @@ export async function GET(request) {
     
     const { jwt }=await response.json();
 
-    console.log("your jwt ",jwt);
+    "your jwt ",jwt);
     
 
     const destination=redirect==="set-username" ? "/set-username" : "/home";
